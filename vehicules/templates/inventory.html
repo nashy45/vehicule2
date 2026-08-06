@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Vehicle Inventory - USA Vehicle Dealership{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="mb-4">Vehicle Inventory</h1>
+        
+        <!-- Filters -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="GET" action="{{ url_for('inventory') }}" class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Make</label>
+                        <select name="make" class="form-select">
+                            <option value="">All Makes</option>
+                            {% for make in makes %}
+                            <option value="{{ make }}" {{ 'selected' if request.args.get('make') == make }}>{{ make }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Condition</label>
+                        <select name="condition" class="form-select">
+                            <option value="">All Conditions</option>
+                            <option value="excellent" {{ 'selected' if request.args.get('condition') == 'excellent' }}>Excellent</option>
+                            <option value="good" {{ 'selected' if request.args.get('condition') == 'good' }}>Good</option>
+                            <option value="fair" {{ 'selected' if request.args.get('condition') == 'fair' }}>Fair</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Fuel Type</label>
+                        <select name="fuel_type" class="form-select">
+                            <option value="">All Types</option>
+                            <option value="gasoline" {{ 'selected' if request.args.get('fuel_type') == 'gasoline' }}>Gasoline</option>
+                            <option value="diesel" {{ 'selected' if request.args.get('fuel_type') == 'diesel' }}>Diesel</option>
+                            <option value="electric" {{ 'selected' if request.args.get('fuel_type') == 'electric' }}>Electric</option>
+                            <option value="hybrid" {{ 'selected' if request.args.get('fuel_type') == 'hybrid' }}>Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Transmission</label>
+                        <select name="transmission" class="form-select">
+                            <option value="">All Types</option>
+                            <option value="automatic" {{ 'selected' if request.args.get('transmission') == 'automatic' }}>Automatic</option>
+                            <option value="manual" {{ 'selected' if request.args.get('transmission') == 'manual' }}>Manual</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-filter"></i> Apply Filters
+                        </button>
+                        <a href="{{ url_for('inventory') }}" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Vehicles Grid -->
+        <p class="text-muted mb-4">Showing {{ vehicles|length }} vehicle(s)</p>
+        
+        {% if vehicles %}
+        <div class="row">
+            {% for vehicle in vehicles %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if vehicle.image_url %}
+                        <img src="{{ url_for('static', filename='images/uploads/' + vehicle.image_url) }}" 
+                             class="card-img-top" alt="{{ vehicle.make }} {{ vehicle.model }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="https://via.placeholder.com/400x300/6366f1/ffffff?text={{ vehicle.make }}+{{ vehicle.model }}" 
+                             class="card-img-top" alt="{{ vehicle.make }} {{ vehicle.model }}">
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h5>
+                        <p class="card-text">
+                            <span class="badge bg-success mb-2">{{ vehicle.condition.capitalize() }}</span><br>
+                            <i class="fas fa-tachometer-alt"></i> {{ "{:,}".format(vehicle.mileage) }} km<br>
+                            <i class="fas fa-gas-pump"></i> {{ vehicle.fuel_type.capitalize() }}<br>
+                            <i class="fas fa-cog"></i> {{ vehicle.transmission.capitalize() }}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 text-primary mb-0">${{ "{:,.0f}".format(vehicle.price) }}</span>
+                            <a href="{{ url_for('vehicle_detail', id=vehicle.id) }}" class="btn btn-primary btn-sm">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center">
+            <i class="fas fa-info-circle"></i> No vehicles found matching your criteria. Try adjusting the filters.
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

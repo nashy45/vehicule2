@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ vehicle.make }} {{ vehicle.model }} - Vehicle Details{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Vehicle Image -->
+        <div class="col-lg-7 mb-4">
+            {% if vehicle.image_url %}
+            <img src="{{ url_for('static', filename='images/uploads/' + vehicle.image_url) }}" 
+                 alt="{{ vehicle.make }} {{ vehicle.model }}"
+                 class="img-fluid rounded shadow">
+            {% else %}
+            <div class="bg-light d-flex align-items-center justify-content-center rounded shadow" 
+                 style="height: 400px;">
+                <i class="fas fa-car fa-5x text-muted"></i>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Vehicle Details -->
+        <div class="col-lg-5">
+            <div class="mb-3">
+                {% if vehicle.featured %}
+                <span class="badge bg-primary mb-2">Featured</span>
+                {% endif %}
+                <span class="badge bg-success mb-2">{{ vehicle.status | title }}</span>
+            </div>
+            
+            <h1 class="display-5 fw-bold mb-3">{{ vehicle.make }} {{ vehicle.model }}</h1>
+            <h2 class="text-primary mb-4">${{ "{:,.0f}".format(vehicle.price) }}</h2>
+            
+            <!-- Specifications -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Specifications</h5>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-calendar text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted">Year</small>
+                                    <div class="fw-bold">{{ vehicle.year }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-tachometer-alt text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted">Mileage</small>
+                                    <div class="fw-bold">{{ "{:,}".format(vehicle.mileage) }} km</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-gas-pump text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted">Fuel Type</small>
+                                    <div class="fw-bold">{{ vehicle.fuel_type | title }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-cogs text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted">Transmission</small>
+                                    <div class="fw-bold">{{ vehicle.transmission | title }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-car-side text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted">Body Type</small>
+                                    <div class="fw-bold">{{ vehicle.body_type | title }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted">Condition</small>
+                                    <div class="fw-bold">{{ vehicle.condition | title }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Actions -->
+            <div class="d-grid gap-2">
+                <a href="https://wa.me/+1(901)206-8349text=I'm interested in {{ vehicle.make }} {{ vehicle.model }}" 
+                   class="btn btn-success btn-lg" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
+                </a>
+                <a href="tel:+1(901)206-8349" class="btn btn-primary btn-lg">
+                    <i class="fas fa-phone"></i> Call Us
+                </a>
+                <button type="button" class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#inquiryModal">
+                    <i class="fas fa-envelope"></i> Send Inquiry
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description -->
+    {% if vehicle.description %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Description</h4>
+                    <p class="card-text">{{ vehicle.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Inquiry Modal -->
+<div class="modal fade" id="inquiryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inquiry About {{ vehicle.make }} {{ vehicle.model }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ url_for('contact') }}" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="vehicle_id" value="{{ vehicle.id }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required placeholder="+237 XXX XXX XXX">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
