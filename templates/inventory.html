@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}Inventory - Miami Auto Sales{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="bg-dark text-white py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Browse Our Collection</h1>
+        <p class="lead mb-0">Find the perfect car for your next adventure</p>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Filters Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="filter-sidebar">
+                <!-- Search Filter Card -->
+                <div class="filter-section">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0"><i class="fas fa-filter me-2"></i>Filters</h6>
+                        <a href="{{ url_for('inventory') }}" class="btn btn-sm btn-link text-danger p-0">Clear all</a>
+                    </div>
+                    
+                    <form method="GET" id="filterForm">
+                        <!-- Car Make -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Car Make</label>
+                            <select class="form-select form-select-sm" name="make" onchange="this.form.submit()">
+                                <option value="">All Makes</option>
+                                {% for make_option in makes %}
+                                <option value="{{ make_option }}" {% if request.args.get('make') == make_option %}selected{% endif %}>
+                                    {{ make_option }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Condition -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Condition</label>
+                            <select class="form-select form-select-sm" name="condition" onchange="this.form.submit()">
+                                <option value="">All Conditions</option>
+                                <option value="excellent" {% if request.args.get('condition') == 'excellent' %}selected{% endif %}>Excellent</option>
+                                <option value="good" {% if request.args.get('condition') == 'good' %}selected{% endif %}>Good</option>
+                                <option value="fair" {% if request.args.get('condition') == 'fair' %}selected{% endif %}>Fair</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Transmission -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Transmission</label>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="transmission" value="" id="trans_all" {% if not request.args.get('transmission') %}checked{% endif %} onchange="this.form.submit()">
+                                <label class="btn btn-outline-primary btn-sm" for="trans_all">All</label>
+                                
+                                <input type="radio" class="btn-check" name="transmission" value="automatic" id="trans_auto" {% if request.args.get('transmission') == 'automatic' %}checked{% endif %} onchange="this.form.submit()">
+                                <label class="btn btn-outline-primary btn-sm" for="trans_auto">Auto</label>
+                                
+                                <input type="radio" class="btn-check" name="transmission" value="manual" id="trans_manual" {% if request.args.get('transmission') == 'manual' %}checked{% endif %} onchange="this.form.submit()">
+                                <label class="btn btn-outline-primary btn-sm" for="trans_manual">Manual</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Fuel Type -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Fuel Type</label>
+                            <select class="form-select form-select-sm" name="fuel_type" onchange="this.form.submit()">
+                                <option value="">All Types</option>
+                                <option value="gasoline" {% if request.args.get('fuel_type') == 'gasoline' %}selected{% endif %}>Gasoline</option>
+                                <option value="diesel" {% if request.args.get('fuel_type') == 'diesel' %}selected{% endif %}>Diesel</option>
+                                <option value="electric" {% if request.args.get('fuel_type') == 'electric' %}selected{% endif %}>Electric</option>
+                                <option value="hybrid" {% if request.args.get('fuel_type') == 'hybrid' %}selected{% endif %}>Hybrid</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Info Card -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-headset fa-3x text-primary"></i>
+                        </div>
+                        <h6 class="fw-bold">Need Help?</h6>
+                        <p class="text-muted small mb-3">Our team is here 24/7 to assist you</p>
+                        <a href="{{ url_for('contact') }}" class="btn btn-primary btn-sm w-100">Contact Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vehicles Grid -->
+        <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="text-muted mb-0">
+                    <strong>{{ vehicles|length }} cars</strong> available
+                    {% if request.args %}
+                    <span class="badge bg-light text-dark ms-2">
+                        <i class="fas fa-filter me-1"></i> Filtered
+                    </span>
+                    {% endif %}
+                </p>
+                <div class="d-flex gap-2">
+                    <select class="form-select form-select-sm" style="width: auto;">
+                        <option>Sort by: Recommended</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest First</option>
+                    </select>
+                </div>
+            </div>
+            
+            {% if vehicles %}
+            <div class="row g-4">
+                {% for vehicle in vehicles %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm hover-lift vehicle-card">
+                        <div class="position-relative">
+                            {% if vehicle.image_url %}
+                                <img src="{{ url_for('static', filename='images/uploads/' + vehicle.image_url) }}" 
+                                     class="card-img-top" alt="{{ vehicle.make }} {{ vehicle.model }}" 
+                                     style="height: 200px; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <i class="fas fa-car fa-4x text-muted"></i>
+                                </div>
+                            {% endif %}
+                            
+                            {% if vehicle.status == 'available' %}
+                            <span class="vehicle-badge bg-success text-white">
+                                Available
+                            </span>
+                            {% elif vehicle.status == 'reserved' %}
+                            <span class="vehicle-badge bg-warning text-dark">
+                                Reserved
+                            </span>
+                            {% endif %}
+                            
+                            <button class="btn btn-light btn-sm position-absolute top-0 end-0 m-2 rounded-circle" style="width: 36px; height: 36px;">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="card-body">
+                            <h6 class="card-title mb-2">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h6>
+                            
+                            <div class="d-flex justify-content-between text-muted small mb-3">
+                                <span><i class="fas fa-users me-1"></i> 5 Seats</span>
+                                <span><i class="fas fa-cog me-1"></i> {{ vehicle.transmission|title }}</span>
+                                <span><i class="fas fa-gas-pump me-1"></i> {{ vehicle.fuel_type|title }}</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <small class="text-muted">{{ "{:,}".format(vehicle.mileage) }} miles</small>
+                                <span class="badge bg-success ms-2 small">Free Cancellation</span>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="h5 text-primary mb-0">${{ "{:,.0f}".format(vehicle.price) }}</div>
+                                </div>
+                                <a href="{{ url_for('vehicle_detail', id=vehicle.id) }}" class="btn btn-primary btn-sm">
+                                    Select <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                <h4>No vehicles found</h4>
+                <p class="text-muted">Try adjusting your filters to see more results</p>
+                <a href="{{ url_for('inventory') }}" class="btn btn-primary">Clear Filters</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

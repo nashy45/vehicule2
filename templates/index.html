@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Miami Auto Sales{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Search -->
+<section class="hero-section bg-dark text-white position-relative" style="min-height: 600px;">
+    <div class="position-absolute w-100 h-100" style="top: 0; left: 0; opacity: 0.3;">
+        <img src="{{ url_for('static', filename='images/hero-car.jpg') }}" 
+             alt="Hero Car" 
+             style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="container position-relative" style="z-index: 1; padding: 100px 0;">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <p class="text-white-50 mb-2"><i class="fas fa-car me-2"></i> Premium cars. Anywhere you go.</p>
+                <h1 class="display-3 fw-bold mb-3">Find Your Perfect Ride</h1>
+                <p class="lead mb-0">Quality bank-repossessed vehicles at unbeatable prices. Fast buying. No hidden fees.</p>
+            </div>
+        </div>
+        
+        <!-- Search Card -->
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4">
+                        <form action="{{ url_for('inventory') }}" method="GET">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label small text-muted">Make</label>
+                                    <select class="form-select" name="make">
+                                        <option value="">All Makes</option>
+                                        {% for make in ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'BMW', 'Mercedes', 'Nissan'] %}
+                                        <option value="{{ make }}">{{ make }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label small text-muted">Fuel Type</label>
+                                    <select class="form-select" name="fuel_type">
+                                        <option value="">All Types</option>
+                                        <option value="gasoline">Gasoline</option>
+                                        <option value="diesel">Diesel</option>
+                                        <option value="electric">Electric</option>
+                                        <option value="hybrid">Hybrid</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label small text-muted">Transmission</label>
+                                    <select class="form-select" name="transmission">
+                                        <option value="">All</option>
+                                        <option value="automatic">Automatic</option>
+                                        <option value="manual">Manual</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-search me-2"></i> Search Cars
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h3 class="fw-bold mb-3">Why customers love Miami Auto Sales</h3>
+            <p class="text-muted">Quality service and transparent pricing you can trust</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center p-4 h-100 feature-box">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Fast & Easy Buying</h5>
+                    <p class="text-muted small mb-0">Quick selection, instant purchasing. Ready in minutes.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center p-4 h-100 feature-box">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">No Hidden Fees</h5>
+                    <p class="text-muted small mb-0">Transparent pricing. What you see is what you pay.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center p-4 h-100 feature-box">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Top Quality Cars</h5>
+                    <p class="text-muted small mb-0">Premium vehicles inspected for every journey.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center p-4 h-100 feature-box">
+                    <div class="feature-icon mx-auto mb-3">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">24/7 Support</h5>
+                    <p class="text-muted small mb-0">Our support team is here whenever you need us.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Impact & Achievements Section -->
+<div class="bg-light py-5 my-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Our Impact & Results</h2>
+            <p class="lead text-muted">Providing quality bank-repossessed vehicles with transparent service.</p>
+        </div>
+        
+        <div class="row text-center mb-4">
+            <div class="col-md-3 col-6 mb-4">
+                <h2 class="display-3 fw-bold text-primary mb-2">{{ total_vehicles + 225 }}+</h2>
+                <p class="text-muted mb-0">Total Inventory</p>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <h2 class="display-3 fw-bold text-primary mb-2">{{ available_vehicles + 225 }}+</h2>
+                <p class="text-muted mb-0">Available Now</p>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <h2 class="display-3 fw-bold text-primary mb-2">{{ sold_vehicles + 128 }}+</h2>
+                <p class="text-muted mb-0">Vehicles Sold</p>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <h2 class="display-3 fw-bold text-primary mb-2">{{ total_inquiries + 122 }}+</h2>
+                <p class="text-muted mb-0">Happy Customers</p>
+            </div>
+        </div>
+
+        <!-- Performance Card -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div class="card bg-white shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h5 class="text-muted mb-2">Customer Satisfaction</h5>
+                        {% if total_reviews > 0 %}
+                        <h2 class="display-4 fw-bold text-primary mb-2">{{ satisfaction_rate|round(1) }}%</h2>
+                        <p class="text-muted mb-3">Based on {{ total_reviews }} customer {{ 'review' if total_reviews == 1 else 'reviews' }}</p>
+                        {% else %}
+                        <h2 class="display-4 fw-bold text-muted mb-2">No Reviews Yet</h2>
+                        <p class="text-muted mb-3">Be the first to review!</p>
+                        {% endif %}
+                        <p class="text-dark">
+                            {% if total_reviews > 0 %}
+                            Real feedback from customers who purchased vehicles from us.
+                            {% else %}
+                            We value customer feedback and transparency. Leave a review after your purchase!
+                            {% endif %}
+                        </p>
+                        <a href="{{ url_for('submit_review') }}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-star me-1"></i> Leave a Review
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<!-- Our Location -->
+<div class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <img src="{{ url_for('static', filename='images/showroom.jpg') }}" 
+                 alt="Our Location" 
+                 class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6">
+            <h2 class="mb-3">Visit Our Showroom</h2>
+            <p class="mb-3">Come see our vehicles in person. Located in 21500 S Dixie Hwy, Miami, FL 33177.</p>
+            <p><i class="fas fa-map-marker-alt text-primary me-2"></i> <strong>Location:</strong> 21500 S Dixie Hwy, Miami, FL 33177</p>
+            <p><i class="fas fa-phone text-primary me-2"></i> <strong>Phone:</strong>+1(901)206-8349 </p>
+            <p><i class="fas fa-clock text-primary me-2"></i> <strong>Hours:</strong> Mon-Sat, 8AM - 6PM</p>
+            <a href="{{ url_for('contact') }}" class="btn btn-primary mt-3">
+                <i class="fas fa-directions me-2"></i> Get Directions
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<!-- Available Vehicles -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Browse Our Collection</h2>
+                <p class="text-muted mb-0">Find the perfect car for your next adventure</p>
+            </div>
+            <a href="{{ url_for('inventory') }}" class="btn btn-outline-primary">
+                View all cars <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        
+        {% if vehicles %}
+        <div class="row g-4">
+            {% for vehicle in vehicles %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm hover-lift">
+                    {% if vehicle.image_url %}
+                        <img src="{{ url_for('static', filename='images/uploads/' + vehicle.image_url) }}" 
+                             class="card-img-top" alt="{{ vehicle.make }} {{ vehicle.model }}" 
+                             style="height: 220px; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 220px;">
+                            <i class="fas fa-car fa-4x text-muted"></i>
+                        </div>
+                    {% endif %}
+                    
+                    {% if vehicle.featured %}
+                    <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3">
+                        <i class="fas fa-star"></i> Featured
+                    </span>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</h5>
+                        
+                        <div class="d-flex justify-content-between text-muted small mb-3">
+                            <span><i class="fas fa-users me-1"></i> 5 Seats</span>
+                            <span><i class="fas fa-cog me-1"></i> {{ vehicle.transmission|title }}</span>
+                            <span><i class="fas fa-gas-pump me-1"></i> {{ vehicle.fuel_type|title }}</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="h4 text-primary mb-0">${{ "{:,.0f}".format(vehicle.price) }}</div>
+                                <small class="text-muted">{{ "{:,}".format(vehicle.mileage) }} miles</small>
+                            </div>
+                            <a href="{{ url_for('vehicle_detail', id=vehicle.id) }}" class="btn btn-primary">
+                                View Details <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-car fa-4x text-muted mb-3"></i>
+            <p class="lead text-muted">No featured vehicles available at the moment.</p>
+            <a href="{{ url_for('inventory') }}" class="btn btn-primary">Browse All Vehicles</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-5 bg-white">
+    <div class="container text-center">
+        <h2 class="mb-3">Interested in a Vehicle?</h2>
+        <p class="mb-4">Contact us to schedule a viewing or ask questions about any vehicle.</p>
+        <div class="d-flex gap-2 justify-content-center flex-wrap">
+            <a href="https://wa.me/19012068349" class="btn btn-success btn-lg" target="_blank">
+                <i class="fab fa-whatsapp me-2"></i> WhatsApp
+            </a>
+            <a href="tel:+19012068349" class="btn btn-primary btn-lg">
+                <i class="fas fa-phone me-2"></i> Call Now
+            </a>
+            <a href="mailto:Paatymurray@gmail.com" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-envelope me-2"></i> Send Email
+            </a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-message me-2"></i> Send Message
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
