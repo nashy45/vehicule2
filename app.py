@@ -84,7 +84,7 @@ class Review(db.Model):
 # Public Routes
 @app.route('/')
 def index():
-    featured_vehicles = Vehicle.query.filter_by(status='available', featured=True).limit(6).all()
+    featured_vehicles = Vehicle.query.filter_by(status='available', featured=True).order_by(Vehicle.created_at.desc()).limit(6).all()
     
     # Calculate statistics
     total_vehicles = Vehicle.query.count()
