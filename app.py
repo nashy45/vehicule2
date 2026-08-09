@@ -487,6 +487,4 @@ if __name__ == '__main__':
             db.session.commit()
             print("Default admin user created: admin / admin123")
     
-    # Get port from environment variable for production (Render) or use 5000 for local
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(debug=True)
