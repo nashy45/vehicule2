@@ -484,70 +484,90 @@ def init_sample_reviews():
         print("Initializing database with sample reviews...")
         
         sample_reviews = [
-            {
-                "name": "Michael Johnson",
-                "email": "michael.j@email.com",
-                "rating": 5,
-                "comment": "Excellent service! Found exactly what I was looking for. The car was in great condition and the price was unbeatable. Highly recommend Miami Auto Sales!",
-                "is_approved": True,
-                "created_at": datetime(2017, 6, 15)
-            },
-            {
-                "name": "Sarah Williams",
-                "email": "sarah.w@email.com",
-                "rating": 5,
-                "comment": "Very professional and transparent process. No hidden fees, just honest pricing. Got a fantastic deal on my SUV. Will definitely recommend to friends!",
-                "is_approved": True,
-                "created_at": datetime(2017, 11, 22)
-            },
-            {
-                "name": "David Martinez",
-                "email": "david.m@email.com",
-                "rating": 4,
-                "comment": "Great experience overall. The team was helpful and patient with all my questions. Found a reliable vehicle at a fair price. Very satisfied!",
-                "is_approved": True,
-                "created_at": datetime(2019, 3, 10)
-            },
-            {
-                "name": "Jennifer Brown",
-                "email": "jennifer.b@email.com",
-                "rating": 5,
-                "comment": "Best car buying experience I've had! No pressure, just genuine help finding the right vehicle. The car runs perfectly and looks amazing. Thank you!",
-                "is_approved": True,
-                "created_at": datetime(2019, 8, 5)
-            },
-            {
-                "name": "Robert Taylor",
-                "email": "robert.t@email.com",
-                "rating": 5,
-                "comment": "Impressed with the quality and service. The vehicle was thoroughly inspected and everything was explained clearly. Got a great deal on a bank repo. Highly recommended!",
-                "is_approved": True,
-                "created_at": datetime(2021, 7, 18)
-            },
-            {
-                "name": "Lisa Anderson",
-                "email": "lisa.a@email.com",
-                "rating": 4,
-                "comment": "Very happy with my purchase! The staff was friendly and professional. Found exactly what I needed within my budget. Would definitely buy from them again.",
-                "is_approved": True,
-                "created_at": datetime(2022, 2, 28)
-            },
-            {
-                "name": "James Wilson",
-                "email": "james.w@email.com",
-                "rating": 5,
-                "comment": "Outstanding experience from start to finish! The team went above and beyond to help me find the perfect vehicle. Great prices and excellent customer service!",
-                "is_approved": True,
-                "created_at": datetime(2026, 5, 12)
-            },
-            {
-                "name": "Patricia Davis",
-                "email": "patricia.d@email.com",
-                "rating": 5,
-                "comment": "Couldn't be happier with my purchase! Professional service, fair pricing, and a quality vehicle. This is the place to go for bank repossessed cars!",
-                "is_approved": True,
-                "created_at": datetime(2026, 7, 20)
-            }
+            # 2017 Reviews (10 reviews - first year)
+            {"name": "Michael Johnson", "email": "michael.j@email.com", "rating": 5, "comment": "Excellent service! Found exactly what I was looking for. The car was in great condition and the price was unbeatable.", "is_approved": True, "created_at": datetime(2017, 6, 15)},
+            {"name": "Sarah Williams", "email": "sarah.w@email.com", "rating": 5, "comment": "Very professional and transparent process. No hidden fees, just honest pricing. Got a fantastic deal on my SUV!", "is_approved": True, "created_at": datetime(2017, 7, 22)},
+            {"name": "Robert Martinez", "email": "robert.m@email.com", "rating": 4, "comment": "Great experience. The staff took time to explain everything about the vehicle. Fair pricing on a quality car.", "is_approved": True, "created_at": datetime(2017, 8, 10)},
+            {"name": "Jennifer Garcia", "email": "jennifer.g@email.com", "rating": 5, "comment": "Best car buying experience! No pressure sales, just genuine help. Found my perfect vehicle within budget.", "is_approved": True, "created_at": datetime(2017, 9, 5)},
+            {"name": "David Lee", "email": "david.l@email.com", "rating": 5, "comment": "Highly recommend Miami Auto Sales! Got a reliable truck at an amazing price. Professional team!", "is_approved": True, "created_at": datetime(2017, 10, 12)},
+            {"name": "Maria Rodriguez", "email": "maria.r@email.com", "rating": 4, "comment": "Happy with my purchase. The car runs great and the price was very reasonable. Good service overall.", "is_approved": True, "created_at": datetime(2017, 11, 3)},
+            {"name": "James Anderson", "email": "james.a@email.com", "rating": 5, "comment": "Impressed with the quality of vehicles available. Got exactly what I needed. Will be back!", "is_approved": True, "created_at": datetime(2017, 11, 28)},
+            {"name": "Linda Thomas", "email": "linda.t@email.com", "rating": 5, "comment": "Fantastic experience from start to finish. No hassle, fair pricing, quality vehicle. Highly recommend!", "is_approved": True, "created_at": datetime(2017, 12, 8)},
+            {"name": "Carlos Hernandez", "email": "carlos.h@email.com", "rating": 4, "comment": "Good selection of vehicles. Found a reliable sedan at a great price. Staff was helpful throughout.", "is_approved": True, "created_at": datetime(2017, 12, 15)},
+            {"name": "Patricia White", "email": "patricia.w@email.com", "rating": 5, "comment": "Love my new car! The team made the process so easy. Great prices on bank repos!", "is_approved": True, "created_at": datetime(2017, 12, 22)},
+            
+            # 2018 Reviews (12 reviews)
+            {"name": "John Miller", "email": "john.m@email.com", "rating": 5, "comment": "Outstanding service! Got a great deal on a quality vehicle. Will definitely recommend to friends.", "is_approved": True, "created_at": datetime(2018, 1, 15)},
+            {"name": "Angela Brown", "email": "angela.b@email.com", "rating": 4, "comment": "Very satisfied with my purchase. Fair pricing and transparent process throughout.", "is_approved": True, "created_at": datetime(2018, 2, 10)},
+            {"name": "Steven Davis", "email": "steven.d@email.com", "rating": 5, "comment": "Best place for bank repossessed vehicles! Got an amazing SUV at unbeatable price.", "is_approved": True, "created_at": datetime(2018, 3, 5)},
+            {"name": "Michelle Wilson", "email": "michelle.w@email.com", "rating": 5, "comment": "Professional team, quality vehicles. Found exactly what I was looking for within my budget.", "is_approved": True, "created_at": datetime(2018, 4, 12)},
+            {"name": "Daniel Moore", "email": "daniel.m@email.com", "rating": 4, "comment": "Great experience buying my first car here. Staff was patient and helpful. Good prices!", "is_approved": True, "created_at": datetime(2018, 5, 20)},
+            {"name": "Jessica Taylor", "email": "jessica.t@email.com", "rating": 5, "comment": "Love my new vehicle! Excellent condition and the price was perfect. Highly recommend!", "is_approved": True, "created_at": datetime(2018, 6, 8)},
+            {"name": "Kevin Anderson", "email": "kevin.a@email.com", "rating": 5, "comment": "Impressed with the service and vehicle quality. No hidden fees, just honest pricing.", "is_approved": True, "created_at": datetime(2018, 7, 14)},
+            {"name": "Amanda Jackson", "email": "amanda.j@email.com", "rating": 4, "comment": "Happy with my purchase. Found a reliable car at a fair price. Good customer service.", "is_approved": True, "created_at": datetime(2018, 8, 22)},
+            {"name": "Brian Martin", "email": "brian.m@email.com", "rating": 5, "comment": "Fantastic experience! Got a quality truck at an amazing price. Will be back for sure!", "is_approved": True, "created_at": datetime(2018, 9, 10)},
+            {"name": "Nicole Garcia", "email": "nicole.g@email.com", "rating": 5, "comment": "Best car buying experience ever! Professional, honest, and great selection of vehicles.", "is_approved": True, "created_at": datetime(2018, 10, 5)},
+            {"name": "Christopher Lee", "email": "chris.l@email.com", "rating": 4, "comment": "Good service and fair pricing. Found exactly what I needed. Satisfied customer!", "is_approved": True, "created_at": datetime(2018, 11, 12)},
+            {"name": "Rebecca Martinez", "email": "rebecca.m@email.com", "rating": 5, "comment": "Highly recommend! Got a beautiful sedan at an unbeatable price. Thank you Miami Auto Sales!", "is_approved": True, "created_at": datetime(2018, 12, 3)},
+            
+            # 2019 Reviews (10 reviews)
+            {"name": "Matthew Thompson", "email": "matthew.t@email.com", "rating": 5, "comment": "Excellent service and quality vehicles. Got exactly what I wanted at the right price.", "is_approved": True, "created_at": datetime(2019, 1, 18)},
+            {"name": "Emily Rodriguez", "email": "emily.r@email.com", "rating": 4, "comment": "Very happy with my purchase. Professional staff and transparent pricing. Good experience!", "is_approved": True, "created_at": datetime(2019, 3, 10)},
+            {"name": "Joshua Hernandez", "email": "joshua.h@email.com", "rating": 5, "comment": "Great place to buy a car! No pressure, just honest help. Got a fantastic deal!", "is_approved": True, "created_at": datetime(2019, 4, 22)},
+            {"name": "Ashley Lopez", "email": "ashley.l@email.com", "rating": 5, "comment": "Love my new car! The team was amazing and helped me find the perfect vehicle.", "is_approved": True, "created_at": datetime(2019, 6, 8)},
+            {"name": "Andrew Wilson", "email": "andrew.w@email.com", "rating": 4, "comment": "Good selection and fair prices. Staff was helpful throughout the process.", "is_approved": True, "created_at": datetime(2019, 7, 15)},
+            {"name": "Stephanie Moore", "email": "stephanie.m@email.com", "rating": 5, "comment": "Fantastic experience! Got a quality SUV at an amazing price. Highly recommend!", "is_approved": True, "created_at": datetime(2019, 8, 5)},
+            {"name": "Ryan Taylor", "email": "ryan.t@email.com", "rating": 5, "comment": "Best place for bank repos! Professional service and great vehicles. Very satisfied!", "is_approved": True, "created_at": datetime(2019, 9, 20)},
+            {"name": "Melissa Anderson", "email": "melissa.a@email.com", "rating": 4, "comment": "Happy with my purchase. Fair pricing and good customer service. Would recommend!", "is_approved": True, "created_at": datetime(2019, 10, 12)},
+            {"name": "Justin Thomas", "email": "justin.t@email.com", "rating": 5, "comment": "Excellent experience buying my truck here. No hassle and great price!", "is_approved": True, "created_at": datetime(2019, 11, 8)},
+            {"name": "Rachel Jackson", "email": "rachel.j@email.com", "rating": 5, "comment": "Outstanding service! Got exactly what I needed within budget. Thank you!", "is_approved": True, "created_at": datetime(2019, 12, 15)},
+            
+            # 2020 Reviews (8 reviews)
+            {"name": "Brandon White", "email": "brandon.w@email.com", "rating": 5, "comment": "Great experience despite pandemic. Safe process, quality vehicle, fair price!", "is_approved": True, "created_at": datetime(2020, 2, 10)},
+            {"name": "Victoria Harris", "email": "victoria.h@email.com", "rating": 4, "comment": "Happy with my purchase. Professional service and good selection of vehicles.", "is_approved": True, "created_at": datetime(2020, 4, 20)},
+            {"name": "Tyler Martin", "email": "tyler.m@email.com", "rating": 5, "comment": "Excellent service! Found my perfect car at an amazing price. Highly recommend!", "is_approved": True, "created_at": datetime(2020, 6, 15)},
+            {"name": "Samantha Clark", "email": "samantha.c@email.com", "rating": 5, "comment": "Love my new vehicle! Professional team and transparent pricing. Best experience!", "is_approved": True, "created_at": datetime(2020, 8, 8)},
+            {"name": "Jacob Lewis", "email": "jacob.l@email.com", "rating": 4, "comment": "Good service and fair pricing. Found exactly what I was looking for.", "is_approved": True, "created_at": datetime(2020, 9, 22)},
+            {"name": "Lauren Walker", "email": "lauren.w@email.com", "rating": 5, "comment": "Fantastic experience! Got a quality SUV at great price. Will recommend to everyone!", "is_approved": True, "created_at": datetime(2020, 10, 18)},
+            {"name": "Nathan Hall", "email": "nathan.h@email.com", "rating": 5, "comment": "Best car buying experience! No pressure, honest pricing, quality vehicle!", "is_approved": True, "created_at": datetime(2020, 11, 12)},
+            {"name": "Brittany Allen", "email": "brittany.a@email.com", "rating": 4, "comment": "Very satisfied with my purchase. Professional staff and good selection.", "is_approved": True, "created_at": datetime(2020, 12, 5)},
+            
+            # 2021 Reviews (8 reviews)
+            {"name": "Eric Young", "email": "eric.y@email.com", "rating": 5, "comment": "Outstanding service! Got exactly what I wanted at the perfect price. Highly recommend!", "is_approved": True, "created_at": datetime(2021, 2, 14)},
+            {"name": "Kimberly King", "email": "kimberly.k@email.com", "rating": 5, "comment": "Love my new car! Professional team made everything so easy. Great prices!", "is_approved": True, "created_at": datetime(2021, 4, 8)},
+            {"name": "Jonathan Wright", "email": "jonathan.w@email.com", "rating": 4, "comment": "Good experience overall. Fair pricing and helpful staff. Happy with my purchase!", "is_approved": True, "created_at": datetime(2021, 6, 20)},
+            {"name": "Amber Scott", "email": "amber.s@email.com", "rating": 5, "comment": "Excellent experience! Found the perfect vehicle within my budget. Thank you!", "is_approved": True, "created_at": datetime(2021, 7, 18)},
+            {"name": "Robert Taylor", "email": "robert.t@email.com", "rating": 5, "comment": "Impressed with the quality and service. Got a great deal on a bank repo. Highly recommended!", "is_approved": True, "created_at": datetime(2021, 9, 10)},
+            {"name": "Crystal Green", "email": "crystal.g@email.com", "rating": 4, "comment": "Happy with my purchase. Professional service and transparent pricing throughout.", "is_approved": True, "created_at": datetime(2021, 10, 5)},
+            {"name": "Aaron Baker", "email": "aaron.b@email.com", "rating": 5, "comment": "Fantastic experience! Got a quality truck at amazing price. Will be back!", "is_approved": True, "created_at": datetime(2021, 11, 15)},
+            {"name": "Heather Adams", "email": "heather.a@email.com", "rating": 5, "comment": "Best place to buy a car! No hassle, fair pricing, excellent service!", "is_approved": True, "created_at": datetime(2021, 12, 8)},
+            
+            # 2022 Reviews (6 reviews)
+            {"name": "Marcus Nelson", "email": "marcus.n@email.com", "rating": 5, "comment": "Outstanding service! Got exactly what I needed at the right price. Highly recommend!", "is_approved": True, "created_at": datetime(2022, 2, 12)},
+            {"name": "Lisa Anderson", "email": "lisa.a@email.com", "rating": 4, "comment": "Very happy with my purchase! Staff was friendly and professional. Found exactly what I needed.", "is_approved": True, "created_at": datetime(2022, 2, 28)},
+            {"name": "Derek Carter", "email": "derek.c@email.com", "rating": 5, "comment": "Excellent experience! Quality vehicle at unbeatable price. Thank you Miami Auto Sales!", "is_approved": True, "created_at": datetime(2022, 5, 18)},
+            {"name": "Monica Mitchell", "email": "monica.m@email.com", "rating": 5, "comment": "Love my new SUV! Professional team and transparent pricing. Best experience ever!", "is_approved": True, "created_at": datetime(2022, 8, 22)},
+            {"name": "Gregory Perez", "email": "gregory.p@email.com", "rating": 4, "comment": "Good service and fair prices. Found a reliable vehicle within budget.", "is_approved": True, "created_at": datetime(2022, 10, 10)},
+            {"name": "Tiffany Roberts", "email": "tiffany.r@email.com", "rating": 5, "comment": "Fantastic experience! Got exactly what I wanted. Highly recommend to everyone!", "is_approved": True, "created_at": datetime(2022, 11, 28)},
+            
+            # 2023 Reviews (4 reviews)
+            {"name": "Keith Turner", "email": "keith.t@email.com", "rating": 5, "comment": "Great service! Found my perfect car at an amazing price. Very professional team!", "is_approved": True, "created_at": datetime(2023, 3, 15)},
+            {"name": "Vanessa Phillips", "email": "vanessa.p@email.com", "rating": 4, "comment": "Happy with my purchase. Good selection and fair pricing. Would recommend!", "is_approved": True, "created_at": datetime(2023, 6, 8)},
+            {"name": "Raymond Campbell", "email": "raymond.c@email.com", "rating": 5, "comment": "Excellent experience! No pressure sales, just honest help. Got a great deal!", "is_approved": True, "created_at": datetime(2023, 9, 20)},
+            {"name": "Natalie Parker", "email": "natalie.p@email.com", "rating": 5, "comment": "Love my new vehicle! Professional service and quality cars. Highly recommend!", "is_approved": True, "created_at": datetime(2023, 11, 12)},
+            
+            # 2024 Reviews (3 reviews)
+            {"name": "Gary Evans", "email": "gary.e@email.com", "rating": 5, "comment": "Outstanding experience! Got exactly what I needed at the perfect price!", "is_approved": True, "created_at": datetime(2024, 4, 10)},
+            {"name": "Denise Edwards", "email": "denise.e@email.com", "rating": 4, "comment": "Very satisfied with my purchase. Professional staff and good prices.", "is_approved": True, "created_at": datetime(2024, 8, 15)},
+            {"name": "Russell Collins", "email": "russell.c@email.com", "rating": 5, "comment": "Fantastic service! Found the perfect truck at an amazing price. Thank you!", "is_approved": True, "created_at": datetime(2024, 11, 20)},
+            
+            # 2025 Reviews (2 reviews)
+            {"name": "Sharon Stewart", "email": "sharon.s@email.com", "rating": 5, "comment": "Excellent experience! Professional team and quality vehicles. Highly recommend!", "is_approved": True, "created_at": datetime(2025, 2, 8)},
+            {"name": "Philip Sanchez", "email": "philip.s@email.com", "rating": 4, "comment": "Happy with my purchase. Fair pricing and good customer service.", "is_approved": True, "created_at": datetime(2025, 5, 18)},
+            
+            # 2026 Reviews (2 reviews)
+            {"name": "James Wilson", "email": "james.w@email.com", "rating": 5, "comment": "Outstanding experience from start to finish! The team went above and beyond. Great prices!", "is_approved": True, "created_at": datetime(2026, 5, 12)},
+            {"name": "Patricia Davis", "email": "patricia.d@email.com", "rating": 5, "comment": "Couldn't be happier with my purchase! Professional service and quality vehicle!", "is_approved": True, "created_at": datetime(2026, 7, 20)}
         ]
         
         for review_data in sample_reviews:
