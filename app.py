@@ -488,3 +488,18 @@ if __name__ == '__main__':
             print("Default admin user created: admin / admin123")
     
     app.run(debug=True)
+else:
+    # When running on Render with gunicorn, create tables on import
+    with app.app_context():
+        db.create_all()
+        
+        # Create default admin user if not exists
+        if not User.query.filter_by(username='admin').first():
+            admin = User(
+                username='admin',
+                email='admin@example.com',
+                password=generate_password_hash('admin123'),
+                is_admin=True
+            )
+            db.session.add(admin)
+            db.session.commit()
