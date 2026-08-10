@@ -108,7 +108,8 @@ def index():
                          sold_vehicles=sold_vehicles,
                          total_inquiries=total_inquiries,
                          satisfaction_rate=satisfaction_rate,
-                         total_reviews=len(approved_reviews))
+                         total_reviews=len(approved_reviews),
+                         approved_reviews=approved_reviews)
 
 @app.route('/inventory')
 def inventory():
