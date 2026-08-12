@@ -17,9 +17,9 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'Paatymurray@gmail.com'  # Your email
+app.config['MAIL_USERNAME'] = 'bankrepossessedvehicul@gmail.com'  # Your email
 app.config['MAIL_PASSWORD'] = 'your-app-password-here'  # Gmail App Password (see instructions below)
-app.config['MAIL_DEFAULT_SENDER'] = 'Paatymurray@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = 'bankrepossessedvehicul@gmail.com'
 
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -160,7 +160,7 @@ def contact():
         try:
             msg = Message(
                 subject='New Contact Form Inquiry - Douala Vehicles',
-                recipients=['Paatymurray@gmail.com'],  # Your email to receive notifications
+                recipients=['bankrepossessedvehicul@gmail.com'],  # Your email to receive notifications
                 body=f"""
 New inquiry from your website!
 
@@ -209,7 +209,7 @@ def submit_review():
         try:
             msg = Message(
                 subject='New Customer Review Submitted - Miami Auto Sales',
-                recipients=['Paatymurray@gmail.com'],
+                recipients=['bankrepossessedvehicul@gmail.com'],
                 body=f"""
 A new customer review has been submitted and is pending approval.
 
